@@ -1,4 +1,6 @@
 
+using OrderPathBackend.MessageBroker;
+
 namespace OrderPathBackend
 {
     public class Program
@@ -10,6 +12,7 @@ namespace OrderPathBackend
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddScoped<IPublisher, RabbitMQPublisher>();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

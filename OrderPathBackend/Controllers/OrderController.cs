@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using OrderPathBackend.MessageBroker;
 
 namespace OrderPathBackend.Controllers
 {
@@ -7,10 +8,12 @@ namespace OrderPathBackend.Controllers
     public class OrderController : ControllerBase
     {
         private readonly ILogger<OrderController> _logger;
+        private readonly IPublisher _publish;
 
-        public OrderController(ILogger<OrderController> logger)
+        public OrderController(ILogger<OrderController> logger, IPublisher publish)
         {
             _logger = logger;
+            _publish = publish;
         }
 
         [HttpPost]
@@ -18,6 +21,7 @@ namespace OrderPathBackend.Controllers
         public IActionResult PlaceOrder(Order order)
         {
             // raise event for order placement
+            _publish.SendMessage($"Order placed by {order.PlacedBy} for {order.Item}");
             return Ok(order);
 
         }
