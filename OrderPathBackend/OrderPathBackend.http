@@ -1,11 +1,5 @@
 @OrderPathBackend_HostAddress = http://localhost:5261
-
-GET {{OrderPathBackend_HostAddress}}/Order/
-Accept: application/json
-
-
 ###
-
 
 POST {{OrderPathBackend_HostAddress}}/Order/
 Content-Type: application/json
