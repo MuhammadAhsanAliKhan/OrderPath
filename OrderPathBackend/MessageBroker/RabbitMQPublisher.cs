@@ -16,8 +16,7 @@ namespace OrderPathBackend.MessageBroker
             var connection = factory.CreateConnectionAsync().GetAwaiter().GetResult();
             channel = connection.CreateChannelAsync().GetAwaiter().GetResult();
 
-            channel.QueueDeclareAsync(queue: "orderqueue", durable: false, exclusive: false, autoDelete: false,
-                arguments: null);
+            channel.ExchangeDeclareAsync(exchange: "logs", type: ExchangeType.Fanout).GetAwaiter().GetResult();
         }
 
 
@@ -27,7 +26,7 @@ namespace OrderPathBackend.MessageBroker
             var body = Encoding.UTF8.GetBytes(message);
             
 
-            await channel.BasicPublishAsync(exchange: string.Empty, routingKey: "hello", body: body);
+            await channel.BasicPublishAsync(exchange: "logs", routingKey: string.Empty, body: body);
         }
 
 
