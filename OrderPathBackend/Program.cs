@@ -1,5 +1,6 @@
 
-using OrderPathBackend.MessageBroker;
+using MessageBroker.RabbitMQ;
+using MessageBroker;
 
 namespace OrderPathBackend
 {

@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using OrderPathBackend.MessageBroker;
+using MessageBroker;
 
 namespace OrderPathBackend.Controllers
 {

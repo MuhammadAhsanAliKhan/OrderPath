@@ -1,4 +1,4 @@
-﻿namespace OrderPathBackend.MessageBroker
+﻿namespace MessageBroker
 {
     public interface IPublisher
     {

@@ -1,4 +1,4 @@
-using OrderPathBackend.MessageBroker;
+using MessageBroker;
 
 namespace OrderProcessingService
 {

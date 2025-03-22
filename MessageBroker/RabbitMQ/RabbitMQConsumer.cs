@@ -1,11 +1,12 @@
 ﻿
 
+using System;
 using System.Text;
-using System.Threading.Channels;
+using System.Threading.Tasks;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
-namespace OrderPathBackend.MessageBroker
+namespace MessageBroker.RabbitMQ
 {
     public class RabbitMQConsumer: IConsumer
     {
@@ -19,7 +20,7 @@ namespace OrderPathBackend.MessageBroker
             channel.ExchangeDeclareAsync(exchange: "logs",
                 type: ExchangeType.Fanout).GetAwaiter().GetResult();
         }
-        public async Task ReceiveMessage(Func<string, Task> method)
+        public async Task ReceiveMessage(Func<string, Task> onRecieve)
         {
             QueueDeclareOk queueDeclareResult = await channel.QueueDeclareAsync();
             string queueName = queueDeclareResult.QueueName;
@@ -30,7 +31,7 @@ namespace OrderPathBackend.MessageBroker
             {
                 byte[] body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                method(message);
+                onRecieve(message);
                 return Task.CompletedTask;
             };
 

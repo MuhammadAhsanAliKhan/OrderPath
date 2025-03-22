@@ -1,9 +1,7 @@
 ﻿using System.Text;
-using System.Threading.Channels;
-using RabbitMQ;
 using RabbitMQ.Client;
 
-namespace OrderPathBackend.MessageBroker
+namespace MessageBroker.RabbitMQ
 {
     public class RabbitMQPublisher : IPublisher
     {
